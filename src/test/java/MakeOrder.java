@@ -3,7 +3,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -39,7 +38,7 @@ public class MakeOrder {
     public static Object[][] getBlabla() {
         return new Object[][] {
                 { "Иван", "Иванов", "ввв Ленинград", "Печатники", "79998887766", "09.12.2022", "трое суток", "спасибо!"},
-//                { "Петька", "Петров", "спб точка ру", "Дубровка", "71234567890", "01.01.2023", "сутки", "вход со двора"},
+                { "Петька", "Петров", "спб точка ру", "Дубровка", "71234567890", "01.01.2023", "сутки", "вход со двора"},
         };
     }
 

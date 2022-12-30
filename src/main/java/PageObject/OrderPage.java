@@ -1,11 +1,8 @@
 package PageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.Select;
 
 public class OrderPage {
     private WebDriver driver;
@@ -13,12 +10,13 @@ public class OrderPage {
     private By bottomOrderButton = By.className("Button_Button__ra12g Button_Middle__1CSJM");
     // Верхняя кнопка закакза
     private By topOrderButton = By.className("Button_Button__ra12g");
+
+    // Тест "Вопросы о важном"
+    private By textImpotientQuestions = By.className("Home_FAQ__3uVm4");
+
     // Заголовок формы ввода
     private By formHeader = By.className("Order_Header__BZXOb");
-    // Имя /html/body/div/div/div[2]/div[2]/div[1]/input
-    //     /html/body/div/div/div[2]/div[2]/div[2]/input
-    // .Order_Form__17u6u > div:nth-child(1) > input:nth-child(1)
-    // div.Input_InputContainer__3NykH:nth-child(2) > input:nth-child(1)
+
     private By nameField = By.cssSelector(".Order_Form__17u6u > div:nth-child(1) > input:nth-child(1)");
     // Фамилия
     private By familyField = By.cssSelector("div.Input_InputContainer__3NykH:nth-child(2) > input:nth-child(1)");
@@ -33,7 +31,6 @@ public class OrderPage {
     private By customerButtonNext = By.cssSelector("#root > div > div.Order_Content__bmtHS > div.Order_NextButton__1_rCA > button");
     // Поле ввода даты заказа
     private By dateField = By.cssSelector("#root > div > div.Order_Content__bmtHS > div.Order_Form__17u6u > div.Order_MixedDatePicker__3qiay > div.react-datepicker-wrapper > div > input");
-    private By dropMenu = By.className("Dropdown-menu");
     // Поле ввода срока аренды
     private By periodField = By.className("Dropdown-control");
     private By periodItem2 = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[2]/div[2]/div[1]");
@@ -54,6 +51,21 @@ public class OrderPage {
 
     public OrderPage(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public void clickQuestionElement(String text) {
+        driver.findElement(By.xpath("//*[contains(text(), '"+text+"')]")).click();
+    }
+    public void waitForAnswerText(String text) {
+        By element = By.xpath("//*[contains(text(), '" + text + "')]");
+        new WebDriverWait(driver, 10).until(
+                ExpectedConditions.textToBePresentInElementLocated(element, text)
+        );
+    }
+
+    public void scrollToQuestions() {
+        WebElement element = driver.findElement(textImpotientQuestions);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public void clickBottomOrderButton() {
